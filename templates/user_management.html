@@ -1,0 +1,38 @@
+{% extends "admin_dashboard.html" %} {% block title %} Edit Job {% endblock %}
+{% block content %}
+
+<div class="container mt-4">
+  <h3>Manage Users</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Profile Picture</th>
+          <th>Actions</th>
+        </tr>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+              <img src="/{{ user.profile_picture }}" alt="Profile" class="img-thumbnail">
+            </td>
+            <td>
+              <a href="{{ url_for('edit_user', id=user.id)}}" class="btn btn-primary btn-sm">Edit</a>
+              <a href="{{ url_for('delete_user', id=user.id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure')">Delete</a>
+            </td>
+          </tr>
+          { % endfor %}
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>
+{% endblock %}
